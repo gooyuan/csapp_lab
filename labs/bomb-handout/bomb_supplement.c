@@ -96,7 +96,52 @@ void phase_3(char* input){
     }
 
 }
+int func4(%edx, %esi, %edi){
+    // 0xe in %edx, 0 in %esi, input 2 params in %edi
+    %eax = %edx;
+    %eax = %eax - %esi;
+    %ecx = %eax;
+    // 当$ecx > 5 时， %ecx = 0
+    %ecx = 0x1f >> $ecx;
+    %eax = %ecx;
+    %eax = %eax >>> 1;
+    // ecx > 5 end, %eax = %ecx = 0;
+    %ecx = %rax + %rsi;
+    
+    if(%ecx <= %edi){
+        %eax = 0;
+        if(%ecx == %edi){
+            return;
+        }else{
+            // %esi 可推断出步长为1
+            %esi = %rcx + 1;
+            func4();
+        }
+    }else{
+        %edx = %rcx - 1;
+        func4();
+        %eax = %eax * 2;
+        reutrn;
+    }
+    
+}
 void phase_4(char* input){
+    int a=0, b=0;
+    if(scanf("%d %d", &a, &b) == 2){
+        if(a <= 0xe){
+            if(func4(0xe, 0, b) != 0){
+                if(b != 0){
+                    explode_bomb();
+                }
+            }else{
+                explode_bomb();
+            }
+        }else{
+            explode_bomb();
+        }
+    }else{
+        explode_bomb();
+    }
 
 }
 void phase_5(char* input){
